@@ -65,26 +65,20 @@ def get_max_salary(path):
         if salary['max_salary'].isdigit():
             all_max_salaries.append(int(salary['max_salary']))
     all_max_salaries.sort(reverse=True)
-    print(all_max_salaries[0])
+
     return all_max_salaries[0]
 
 
 def get_min_salary(path):
-    """Get the minimum salary of all jobs
+    read_content = jobs.read(path)
 
-    Must call `read`
+    all_min_salaries = []
+    for salary in read_content:
+        if salary['min_salary'].isdigit():
+            all_min_salaries.append(int(salary['min_salary']))
+    all_min_salaries.sort()
 
-    Parameters
-    ----------
-    path : str
-        Must be passed to `read`
-
-    Returns
-    -------
-    int
-        The minimum salary paid out of all job opportunities
-    """
-    pass
+    return all_min_salaries[0]
 
 
 def matches_salary_range(job, salary):
