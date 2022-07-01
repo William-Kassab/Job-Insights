@@ -5,10 +5,10 @@ import csv
 @lru_cache
 def read(path):
 
-    with open(path, encoding = "utf-8") as file:
-        path_reader = csv.reader(file, delimiter=",", quotechar='"')
+    with open(path, mode="r") as file:
+        path_reader = csv.DictReader(file)
 
-        header, *data = path_reader
+        list_content = list(path_reader)
 
     """Reads a file from a given path and returns its contents
     
@@ -22,4 +22,4 @@ def read(path):
     list
         List of rows as dicts
     """
-    return [data]
+    return list_content
