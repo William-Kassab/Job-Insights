@@ -1,3 +1,4 @@
+from curses.ascii import isdigit
 from . import jobs
 
 
@@ -29,21 +30,14 @@ def filter_by_job_type(jobs, job_type):
 
 
 def get_unique_industries(path):
-    """Checks all different industries and returns a list of them
+    read_content = jobs.read(path)
 
-    Must call `read`
+    industries_dict = {}
+    for industry in read_content:
+        if industry['industry'] != "":
+            industries_dict[industry['industry']] = industry['industry']
 
-    Parameters
-    ----------
-    path : str
-        Must be passed to `read`
-
-    Returns
-    -------
-    list
-        List of unique industries
-    """
-    return []
+    return industries_dict
 
 
 def filter_by_industry(jobs, industry):
@@ -65,21 +59,15 @@ def filter_by_industry(jobs, industry):
 
 
 def get_max_salary(path):
-    """Get the maximum salary of all jobs
+    read_content = jobs.read(path)
 
-    Must call `read`
-
-    Parameters
-    ----------
-    path : str
-        Must be passed to `read`
-
-    Returns
-    -------
-    int
-        The maximum salary paid out of all job opportunities
-    """
-    pass
+    all_max_salaries = []
+    for salary in read_content:
+        if salary['max_salary'].isdigit():
+            all_max_salaries.append(int(salary['max_salary']))
+    all_max_salaries.sort(reverse=True)
+    print(all_max_salaries[0])
+    return all_max_salaries[0]
 
 
 def get_min_salary(path):
