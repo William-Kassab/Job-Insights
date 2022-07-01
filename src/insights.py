@@ -67,22 +67,15 @@ def matches_salary_range(job, salary):
     if type(salary) != int:
         raise ValueError("invalid job!")
 
-    return int(job['min_salary']) <= int(salary) <= int(job['max_salary']) 
+    return int(job['min_salary']) <= int(salary) <= int(job['max_salary'])
 
 
 def filter_by_salary_range(jobs, salary):
-    """Filters a list of jobs by salary range
-
-    Parameters
-    ----------
-    jobs : list
-        The jobs to be filtered
-    salary : int
-        The salary to be used as filter
-
-    Returns
-    -------
-    list
-        Jobs whose salary range contains `salary`
-    """
-    return []
+    jobs_salaries = []
+    for job in jobs:
+        try:
+            if matches_salary_range(job, salary):
+                jobs_salaries.append(job)
+        except ValueError:
+            print("Value Error")
+    return jobs_salaries
